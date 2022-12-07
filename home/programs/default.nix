@@ -1,0 +1,4 @@
+{ pkgs }:
+{
+  bat.enable = true;
+}
