@@ -31,9 +31,15 @@ let
 
   fonts = with pkgs; [
     comic-mono
-    font-awesome
-    font-awesome_5
-  ];
+  ]
+  ++ (with pkgs.nerdfonts;
+    [
+      (override {
+        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" ];
+      })
+    ])
+  ;
+
 
   gitTools = with pkgs; [
     gitkraken
