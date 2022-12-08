@@ -12,5 +12,4 @@ in
   neovim = import ./neovim.nix { inherit pkgs; };
   rofi.enable = true;
   starship = import ./starship.nix { inherit lib; };
-  vscode.enable = true;
 }
