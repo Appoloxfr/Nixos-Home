@@ -15,6 +15,7 @@ let
     mattermost-desktop
     slack
     teams
+    thunderbird
   ];
 
   desktopTools = with pkgs; [
