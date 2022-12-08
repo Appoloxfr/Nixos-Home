@@ -14,6 +14,7 @@
   outputs = { self, nixpkgs, flake-utils, home-manager, ... }:
     let
       username = "gabriel";
+      hostname = "nixos";
       homeDirectory = "/home/${username}";
       system = "x86_64-linux";
       stateVersion = "22.11";
@@ -44,8 +45,8 @@
         };
       };
       nixosConfigurations = {
-        default = system;
-        ${system} = nixpkgs.lib.nixosSystem {
+        default = hostname;
+        ${hostname} = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./nixos/configuration.nix
