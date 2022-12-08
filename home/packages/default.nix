@@ -50,6 +50,10 @@ let
     maven
   ];
 
+  miscTools = with pkgs; [
+    wget
+  ];
+
   nixTools = with pkgs; [
     nixpkgs-fmt
   ];
@@ -68,5 +72,6 @@ buildTools
 ++ gitTools
 ++ ideaTools
 ++ javaTools
+++ miscTools
 ++ nixTools
 ++ shellVisualizerTools
