@@ -115,7 +115,7 @@ in
 {
   windowManager.i3 = {
     enable = true;
-    package = pkgs.i3-gabs;
+    package = pkgs.i3-gaps;
     inherit config;
   };
 }
