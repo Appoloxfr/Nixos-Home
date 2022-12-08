@@ -6,6 +6,7 @@
   firefox.enable = true;
   fish = import ./fish.nix { inherit pkgs lib; };
   git = import ./git.nix;
+  home-manager.enable = true;
   i3status-rust = import ./i3status-rust.nix;
   neovim = import ./neovim.nix { inherit pkgs; };
   rofi.enable = true;
