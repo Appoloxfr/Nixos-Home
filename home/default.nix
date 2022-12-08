@@ -1,4 +1,7 @@
 { pkgs, system, stateVersion, username, homeDirectory }:
+let
+  lib = pkgs.lib;
+in
 {
   fonts.fontconfig.enable = true;
 
@@ -13,6 +16,8 @@
 
   # Configuration of programs
   programs = import ./programs {
-    inherit pkgs;
+    inherit pkgs lib;
   };
+
+  xsession = import ./xsession.nix { inherit pkgs lib; };
 }

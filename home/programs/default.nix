@@ -1,7 +1,4 @@
-{ pkgs }:
-let
-  lib = pkgs.lib;
-in
+{ pkgs, lib }:
 {
   alacritty = import ./alacritty.nix { inherit pkgs; };
   bat.enable = true;
