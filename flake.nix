@@ -43,5 +43,12 @@
           ];
         };
       };
+      nixosConfigurations = {
+        default = system;
+        ${system} = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./nixos/configuration.nix ];
+        };
+      };
     };
 }

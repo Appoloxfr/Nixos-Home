@@ -35,7 +35,6 @@ let
   ];
 
   gitTools = with pkgs; [
-    git
     gitkraken
     gnupg
     pre-commit
@@ -55,14 +54,7 @@ let
     nixpkgs-fmt
   ];
 
-  shellTools = with pkgs; [
-    alacritty
-    fish
-    starship # Pretty prompt
-  ];
-
   shellVisualizerTools = with pkgs; [
-    bat
     mdp
     yq
   ];
@@ -77,5 +69,4 @@ buildTools
 ++ ideaTools
 ++ javaTools
 ++ nixTools
-++ shellTools
 ++ shellVisualizerTools
