@@ -2,6 +2,7 @@
 {
   alacritty = import ./alacritty.nix { inherit pkgs; };
   bat.enable = true;
+  direnv = import ./direnv.nix;
   exa.enable = true;
   firefox.enable = true;
   fish = import ./fish.nix { inherit pkgs lib; };
