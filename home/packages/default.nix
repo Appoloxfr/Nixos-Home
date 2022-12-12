@@ -65,6 +65,10 @@ let
     nixpkgs-fmt
   ];
 
+  pythonTools = with pkgs; [
+    python3
+  ];
+
   shellVisualizerTools = with pkgs; [
     mdp
     yq
@@ -81,4 +85,5 @@ buildTools
 ++ javaTools
 ++ miscTools
 ++ nixTools
+++ pythonTools
 ++ shellVisualizerTools
