@@ -9,6 +9,7 @@
   git = import ./git.nix;
   home-manager.enable = true;
   i3status-rust = import ./i3status-rust.nix;
+  jq.enable = true;
   neovim = import ./neovim.nix { inherit pkgs; };
   rofi.enable = true;
   starship = import ./starship.nix { inherit lib; };
