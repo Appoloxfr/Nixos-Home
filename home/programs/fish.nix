@@ -14,6 +14,10 @@ let
     "lt" = "ls --git-ignore --tree";
 
     # Python
+    "py" = "python3";
+    "ipy" = "ipython";
+
+    # Git
     "gs" = "git status";
     "ga" = "git add";
     "gd" = "git diff";
