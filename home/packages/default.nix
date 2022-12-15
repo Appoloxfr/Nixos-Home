@@ -67,6 +67,7 @@ let
 
   pythonTools = with pkgs; [
     python3
+    python310Packages.ipython
   ];
 
   shellVisualizerTools = with pkgs; [
