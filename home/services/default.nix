@@ -1,0 +1,3 @@
+{
+  betterlockscreen = import ./betterlockscreen.nix;
+}

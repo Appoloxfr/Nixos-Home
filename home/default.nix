@@ -20,4 +20,6 @@ in
   };
 
   xsession = import ./xsession.nix { inherit pkgs lib; };
+
+  services = import ./services;
 }
