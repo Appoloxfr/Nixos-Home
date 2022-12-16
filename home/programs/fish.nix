@@ -43,23 +43,6 @@ let
         "z --list | head -n 5"
       ];
     };
-
-    "ni" = {
-      wraps = "nix";
-      body = lib.concatStringsSep "\n" [
-        "nix $argv"
-        "set -l nixret $status"
-        "if test (count $argv) -eq 0"
-        "  # do nothing"
-        "else if test $argv[1] = build"
-        "  if test $nixret -eq 0"
-        "    notify-send -u low -a Nix -i ~/Pictures/icon-nixos.png -c Build \"Nix build\" \"Build document success\""
-        "  else"
-        "    notify-send -u low -a Nix -i ~/Pictures/icon-nixos.png -c Build \"Nix build\" \"Build document failed\""
-        "  end"
-        "end"
-      ];
-    };
   };
   plugins = [{
     name = "z";
