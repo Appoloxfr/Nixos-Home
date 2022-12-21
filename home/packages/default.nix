@@ -62,6 +62,7 @@ let
   ];
 
   nixTools = with pkgs; [
+    nix
     nixpkgs-fmt
   ];
 
