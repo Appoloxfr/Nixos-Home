@@ -86,6 +86,7 @@
           enable = true;
           noDesktop = true;
           enableXfwm = false;
+          enableScreensaver = false;
         };
       };
       displayManager = { defaultSession = "xfce+i3"; };
@@ -94,7 +95,7 @@
         enable = true;
         extraPackages = with pkgs; [
           dmenu # default i3 dmenu, won't boot without
-          i3lock # default i3 screen locker
+          # i3lock # default i3 screen locker
           i3-gaps
           rofi # upgrade of dmenu
         ];
