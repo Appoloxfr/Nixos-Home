@@ -13,12 +13,17 @@
       VISUAL = "vim";
     };
 
-    systemPackages = with pkgs; [
+    systemPackages = (with pkgs; [
       docker-client
       docker-compose
       arion
       blueman
-    ];
+      pavucontrol
+    ]) ++ (with pkgs.xfce;
+      [
+        xfce4-volumed-pulse
+      ])
+    ;
     shells = [ pkgs.fish ];
   };
 
@@ -78,6 +83,7 @@
   };
 
   services = {
+    blueman.enable = true;
     xserver = {
       enable = true;
       desktopManager = {
@@ -140,7 +146,8 @@
     };
   };
 
-  sound.enable = true;
+  # Conflit with pipewire
+  sound.enable = false;
 
   security.rtkit.enable = true;
 
