@@ -71,6 +71,11 @@ let
     python310Packages.ipython
   ];
 
+  shellTools = with pkgs; [
+    zip
+    unzipNLS
+  ];
+
   shellVisualizerTools = with pkgs; [
     mdp
     yq
@@ -88,4 +93,5 @@ buildTools
 ++ miscTools
 ++ nixTools
 ++ pythonTools
+++ shellTools
 ++ shellVisualizerTools
