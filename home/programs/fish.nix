@@ -28,9 +28,8 @@ let
     # Bat replace cat
     "cat" = "bat";
 
-    # Upgrade nix
-    "upgrade" =
-      "sudo nix-channel --update && nix-channel --update && sudo nixos-rebuild switch && home-manager switch";
+    # Nix
+    "nix-shell" = "nix-shell --run fish";
   };
   shellAliases = {
     "ls" = "exa";
