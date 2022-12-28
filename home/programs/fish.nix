@@ -1,5 +1,6 @@
 { pkgs, lib }:
 let
+  initFile = ./fish/init.fish;
   shellAbbrs = {
     # Grep
     "grep" = "grep --color=auto";
@@ -56,4 +57,5 @@ in
 {
   enable = true;
   inherit shellAbbrs shellAliases functions plugins;
+  interactiveShellInit = (builtins.readFile initFile);
 }
