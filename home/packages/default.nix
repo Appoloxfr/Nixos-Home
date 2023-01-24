@@ -53,7 +53,7 @@ let
   ];
 
   javaTools = with pkgs; [
-    jdk
+    jdk17
     maven
   ];
 
