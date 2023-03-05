@@ -51,10 +51,7 @@
       "https://cache.nixos.org/"
     ];
 
-    gc = {
-      automatic = true;
-      dates = "monthly";
-    };
+    gc.automatic = false;
   };
 
   nixpkgs.config.allowUnfree = true;
