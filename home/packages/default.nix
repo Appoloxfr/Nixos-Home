@@ -40,6 +40,10 @@ let
     ])
   ;
 
+  games = with pkgs; [
+    # Minecraft launcher open source
+    prismlauncher
+  ];
 
   gitTools = with pkgs; [
     gitkraken
@@ -87,6 +91,7 @@ buildTools
 ++ desktopTools
 ++ documentationTools
 ++ fonts
+++ games
 ++ gitTools
 ++ ideaTools
 ++ javaTools
