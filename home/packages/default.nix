@@ -70,7 +70,15 @@ let
     maven
   ];
 
+  lspServers = (with pkgs.nodePackages; [
+    bash-language-server
+    pyright
+  ]) ++ (with pkgs; [
+    rnix-lsp
+  ]);
+
   miscTools = with pkgs; [
+    ripgrep
     wget
   ];
 
@@ -80,8 +88,9 @@ let
   ];
 
   pythonTools = with pkgs; [
-    python3
+    python310
     python310Packages.ipython
+    python310Packages.black
   ];
 
   shellTools = with pkgs; [
@@ -105,6 +114,7 @@ buildTools
 ++ gitTools
 ++ ideaTools
 ++ javaTools
+++ lspServers
 ++ miscTools
 ++ nixTools
 ++ pythonTools
