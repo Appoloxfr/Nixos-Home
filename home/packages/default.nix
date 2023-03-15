@@ -18,6 +18,14 @@ let
     thunderbird
   ];
 
+  csharpTools = (with pkgs;[
+    dotnet-sdk_7
+    or-tools
+  ]) ++
+  (with pkgs.dotnetPackages; [
+    NUnit
+  ]);
+
   desktopTools = with pkgs; [
     arandr
     nitrogen
@@ -53,6 +61,7 @@ let
 
   ideaTools = with pkgs; [
     jetbrains.idea-ultimate
+    jetbrains.rider
     vscode-fhs
   ];
 
@@ -88,6 +97,7 @@ let
 in
 buildTools
 ++ communicationTools
+++ csharpTools
 ++ desktopTools
 ++ documentationTools
 ++ fonts
