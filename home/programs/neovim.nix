@@ -1,9 +1,10 @@
 { pkgs }:
 let
-  neovim-config = builtins.fetchGit {
-    url = "https://github.com/TimotheeDesveaux/nvim-config";
-    ref = "refs/heads/main";
+  neovim-config = pkgs.fetchFromGitHub {
+    owner = "TimotheeDesveaux";
+    repo = "nvim-config";
     rev = "c8fe64a919b7450a44f00e0dabb21adbf83b1156";
+    hash = "sha256-EbArPDUr1w2aIr+0y5XeypzaJ32JTRby47Cjw1wtfFg=";
   };
 in
 {
