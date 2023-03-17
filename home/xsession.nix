@@ -63,6 +63,12 @@ let
       "${mod}+Shift+0" = "move container to workspace number ${ws10}";
     };
 
+    # Hide window title bar 
+    window = {
+      border = 1;
+      titlebar = false;
+    };
+
     # i3 my startup commands
     assigns = {
       "${ws8}" = [{ class = "discord"; }];
@@ -110,6 +116,12 @@ let
       statusCommand =
         "${pkgs.i3status-rust}/bin/i3status-rs \${HOME}/.config/i3status-rust/config-bottom.toml";
     }];
+    gaps = {
+      inner = 6;
+      outer = 3;
+      smartBorders = "on";
+      smartGaps = true;
+    };
   };
 in
 {
