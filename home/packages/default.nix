@@ -88,9 +88,10 @@ let
   ];
 
   pythonTools = with pkgs; [
+    poetry
     python310
-    python310Packages.ipython
     python310Packages.black
+    python310Packages.ipython
   ];
 
   shellTools = with pkgs; [
