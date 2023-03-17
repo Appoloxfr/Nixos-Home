@@ -1,25 +1,21 @@
 let
-  icons = "awesome6";
+  icons = "material-nf";
   theme = "modern";
   bars = {
     bottom = {
       blocks = [
         {
-          block = "disk_space";
-          path = "/";
-          alias = "/";
-          info_type = "available";
-          unit = "GB";
-          interval = 120;
-          warning = 20.0;
           alert = 10.0;
+          alert_unit = "GB";
+          block = "disk_space";
+          info_type = "available";
+          interval = 120;
+          path = "/";
+          warning = 20.0;
         }
         {
           block = "memory";
-          display_type = "memory";
-          format_mem = "{mem_used_percents}";
-          format_swap = "{swap_used_percents}";
-          clickable = false;
+          format = " $icon $mem_total_used_percents ";
         }
         {
           block = "cpu";
@@ -27,17 +23,16 @@ let
         }
         {
           block = "load";
+          format = " $icon $1m ";
           interval = 1;
-          format = "{1m}";
         }
         {
           block = "backlight";
-          device = "intel_backlight";
           cycle = [ 100 50 25 1 25 50 ];
+          device = "intel_backlight";
         }
         {
           block = "sound";
-          show_volume_when_muted = true;
           headphones_indicator = true;
         }
         {
@@ -46,18 +41,18 @@ let
         }
         {
           block = "battery";
-          interval = 30;
           driver = "upower";
+          interval = 30;
         }
         {
           block = "time";
+          format = " $icon $timestamp.datetime(f:'%a %R %d/%m')";
           interval = 60;
-          format = "%a %R %d/%m";
         }
       ];
       settings = {
-        theme.name = theme;
-        icons.name = icons;
+        icons.icons = icons;
+        theme.theme = theme;
       };
       inherit icons theme;
     };
