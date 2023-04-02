@@ -8,7 +8,8 @@
 
   environment = {
     variables = {
-      TERMINAL = "alacritty";
+      TERM = "kitty";
+      TERMINAL = "kitty";
       EDITOR = "vim";
       VISUAL = "vim";
     };
@@ -24,7 +25,6 @@
         xfce4-volumed-pulse
       ])
     ;
-    shells = [ pkgs.fish ];
   };
 
   virtualisation = {
@@ -76,6 +76,15 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
+  programs.fish.enable = true;
+
+  fonts = {
+    fontconfig = {
+      defaultFonts = {
+        emoji = [ "Noto Color Emoji" ];
+      };
+    };
+  };
 
   hardware = {
     bluetooth.enable = true;
@@ -103,7 +112,6 @@
           dmenu # default i3 dmenu, won't boot without
           # i3lock # default i3 screen locker
           i3-gaps
-          rofi # upgrade of dmenu
         ];
         package = pkgs.i3-gaps;
       };

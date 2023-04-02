@@ -11,6 +11,7 @@ let
   ws8 = "  8: discord  ";
   ws9 = "  9: slack  ";
   ws10 = "  10: thunderbird  ";
+  rofiTheme = ./programs/rofi-theme/rofidmenu.rasi;
   config = {
     modifier = mod;
 
@@ -33,7 +34,10 @@ let
 
       # Rofi replace dmenu
       "${mod}+d" =
-        "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi";
+        "exec rofi -modi drun -show drun -config ${rofiTheme}";
+      # Rofimoji
+      "${mod}+e" =
+        "exec rofi -modi emoji -show emoji -theme solarized -font \"hack 12\" -width 800";
 
       # i3logout
       "${mod}+Shift+e" = "exec xfce4-session-logout";

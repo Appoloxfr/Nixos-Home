@@ -29,6 +29,7 @@ let
   desktopTools = with pkgs; [
     arandr
     nitrogen
+    xdotool
   ];
 
   documentationTools = with pkgs; [
@@ -39,14 +40,23 @@ let
 
   fonts = with pkgs; [
     comic-mono
+    hack-font
   ]
   ++ (with pkgs.nerdfonts;
     [
       (override {
-        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" ];
+        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" "NerdFontsSymbolsOnly" ];
       })
     ])
   ;
+
+  formatter = with pkgs; [
+    nixpkgs-fmt
+    nodePackages.prettier
+    python310Packages.black
+    rustfmt
+    stylua
+  ];
 
   games = with pkgs; [
     # Minecraft launcher open source
@@ -56,13 +66,13 @@ let
   gitTools = with pkgs; [
     gitkraken
     gnupg
+    lazygit
     pre-commit
   ];
 
   ideaTools = with pkgs; [
     jetbrains.idea-ultimate
     jetbrains.rider
-    vscode-fhs
   ];
 
   javaTools = with pkgs; [
@@ -73,6 +83,7 @@ let
   lspServers = (with pkgs.nodePackages; [
     bash-language-server
     pyright
+    typescript-language-server
   ]) ++ (with pkgs; [
     rnix-lsp
   ]);
@@ -84,13 +95,16 @@ let
 
   nixTools = with pkgs; [
     nix
-    nixpkgs-fmt
+  ];
+
+  nvimPluggins = with pkgs.vimPlugins; [
+    nvim-treesitter
   ];
 
   pythonTools = with pkgs; [
     poetry
     python310
-    python310Packages.black
+
     python310Packages.ipython
   ];
 
@@ -111,6 +125,7 @@ buildTools
 ++ desktopTools
 ++ documentationTools
 ++ fonts
+++ formatter
 ++ games
 ++ gitTools
 ++ ideaTools
@@ -118,6 +133,7 @@ buildTools
 ++ lspServers
 ++ miscTools
 ++ nixTools
+++ nvimPluggins
 ++ pythonTools
 ++ shellTools
 ++ shellVisualizerTools

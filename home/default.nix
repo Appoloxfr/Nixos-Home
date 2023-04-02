@@ -2,9 +2,7 @@
 let
   lib = pkgs.lib;
 in
-{
-  fonts.fontconfig.enable = true;
-
+rec {
   nixpkgs.config.allowUnfree = true;
 
   home = {
@@ -18,6 +16,8 @@ in
   programs = import ./programs {
     inherit pkgs lib;
   };
+
+  fonts.fontconfig.enable = true;
 
   xsession = import ./xsession.nix { inherit pkgs lib; };
 
