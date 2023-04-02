@@ -25,6 +25,7 @@ let
     "gc" = "git commit";
     "gcm" = "git commit -m";
     "gl" = "git log";
+    "lg" = "lazygit";
 
     # Bat replace cat
     "cat" = "bat";
