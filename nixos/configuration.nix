@@ -15,17 +15,41 @@
       VISUAL = "vim";
     };
 
-    systemPackages = (with pkgs; [
+    systemPackages = with pkgs; [
       docker-client
       docker-compose
       arion
       blueman
       pavucontrol
-    ]) ++ (with pkgs.xfce;
-      [
-        xfce4-volumed-pulse
-      ])
-    ;
+
+      libnotify
+      wl-clipboard
+      wlr-randr
+      wayland
+      wayland-scanner
+      wayland-utils
+      egl-wayland
+      wayland-protocols
+      pkgs.xorg.xeyes
+      glfw-wayland
+      xwayland
+      pkgs.qt6.qtwayland
+      cinnamon.nemo
+      networkmanagerapplet
+      wev
+      wf-recorder
+      alsa-lib
+      alsa-utils
+      flac
+      pulsemixer
+      linux-firmware
+      sshpass
+      lxappearance
+      imagemagick
+      pkgs.sway-contrib.grimshot
+      flameshot
+      grim
+    ];
   };
 
   virtualisation = {
@@ -103,29 +127,6 @@
     gnome.gnome-keyring.enable = true;
     blueman.enable = true;
     xserver = {
-      enable = true;
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-          enableScreensaver = false;
-        };
-      };
-      displayManager = { defaultSession = "xfce+i3"; };
-
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          dmenu # default i3 dmenu, won't boot without
-          # i3lock # default i3 screen locker
-          i3-gaps
-        ];
-        package = pkgs.i3-gaps;
-      };
-
-
       layout = "us";
       xkbVariant = "";
       xkbOptions = "caps:swapescape";
