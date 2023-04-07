@@ -8,9 +8,10 @@
 
   environment = {
     variables = {
+      BROWSER = "firefox";
+      EDITOR = "vim";
       TERM = "kitty";
       TERMINAL = "kitty";
-      EDITOR = "vim";
       VISUAL = "vim";
     };
 
