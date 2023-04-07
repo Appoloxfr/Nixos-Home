@@ -1,10 +1,13 @@
+let
+  rofiTheme = ./programs/rofi-theme/rofidmenu.rasi;
+in
 {
   windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
     nvidiaPatches = false;
     extraConfig = ''
-      $mainMod = MOD4
+      $mainMod = WIN
       monitor=,preferred,auto,1 
       # monitor=HDMI-A-1, 1920x1080, 0x0, 1
       # monitor=eDP-1, 1920x1080, 1920x0, 1
@@ -71,18 +74,6 @@
         blur_ignore_opacity = false
         col.shadow = rgba(1a1a1aee)
       }
-      # animations {
-      #   enabled = yes
-      #
-      #   bezier = easeOutElastic, 0.05, 0.9, 0.1, 1.05
-      #   # bezier=overshot,0.05,0.9,0.1,1.1
-      #
-      #   animation = windows, 1, 5, easeOutElastic
-      #   animation = windowsOut, 1, 5, default, popin 80%
-      #   animation = border, 1, 8, default
-      #   animation = fade, 1, 5, default
-      #   animation = workspaces, 1, 6, default
-      # }
       animations {
         enabled=1
         bezier = overshot, 0.13, 0.99, 0.29, 1.1
@@ -115,9 +106,8 @@
         sensitivity = -0.5
       }
       bind = $mainMod, Return, exec, kitty fish
-      bind = $mainMod SHIFT, Return, exec, kitty --class="termfloat" fish
-      bind = $mainMod SHIFT, P, killactive,
-      bind = $mainMod SHIFT, Q, exit,
+      bind = $mainMod SHIFT, Q, killactive,
+      bind = $mainMod SHIFT, E, exit,
       bind = $mainMod SHIFT, Space, togglefloating,
       bind = $mainMod,F,fullscreen
       bind = $mainMod,Y,pin
@@ -212,18 +202,13 @@
       #------------------------#
       # quickly launch program #
       #------------------------# 
-      bind=$mainMod,B,exec,nvidia-offload firefox
-      bind=$mainMod,M,exec,netease-cloud-music-gtk4 
-      bind=$mainMod SHIFT,M,exec,kitty --class="musicfox" --hold sh -c "musicfox" 
-      bind=$mainMod SHIFT,D,exec,kitty  --class="danmufloat" --hold sh -c "cd /home/ruixi/Codelearning/go/src/bilibili_live_tui/  && export TERM=xterm-256color && go run main.go -c config.toml"
+      bind=$mainMod,D,exec,rofi -modi drun -show drun -config ${rofiTheme}
+      bind=$mainMod,E,exec,rofi -modi emoji -show emoji -theme solarized -font "hack 12" -width 800
       bind=$mainMod SHIFT,X,exec,myswaylock
       bind=$mainMod,T,exec,telegram-desktop
-      bind=$mainMod,Q,exec,nvidia-offload icalingua-plus-plus --enable-features=UseOzonePlatform --ozone-platform=wayland
       bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
       bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
       bind=$mainMod,A,exec, grimblast_watermark
-      bind=,Super_L,exec, pkill rofi || ~/.config/rofi/launcher.sh
-      bind=$mainMod,Super_L,exec, bash ~/.config/rofi/powermenu.sh
       #-----------------------------------------#
       # control volume,brightness,media players-#
       #-----------------------------------------#
