@@ -7,7 +7,8 @@ let
     gcc
     gdb
     gnumake
-    nodejs
+    nodejs-18_x
+    yarn
   ];
 
   communicationTools = with pkgs; [
@@ -29,6 +30,7 @@ let
   desktopTools = with pkgs; [
     arandr
     nitrogen
+    obs-studio
     xdotool
   ];
 
@@ -77,6 +79,8 @@ let
 
   javaTools = with pkgs; [
     jdk17
+    scala
+    sbt-with-scala-native
     maven
   ];
 
@@ -108,6 +112,11 @@ let
     python310Packages.ipython
   ];
 
+  rustTools = with pkgs; [
+    cargo
+    rustc
+  ];
+
   shellTools = with pkgs; [
     zip
     unzipNLS
@@ -135,5 +144,6 @@ buildTools
 ++ nixTools
 ++ nvimPluggins
 ++ pythonTools
+++ rustTools
 ++ shellTools
 ++ shellVisualizerTools
