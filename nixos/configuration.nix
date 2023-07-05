@@ -68,13 +68,18 @@
       experimental-features = nix-command flakes
     '';
 
-    settings.substituters = [
-      # Epita cache
-      "https://s3.cri.epita.fr/cri-nix-cache.s3.cri.epita.fr"
-      # Other cache website
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
-    ];
+    settings = {
+        substituters = [
+        # Epita cache
+        "https://s3.cri.epita.fr/cri-nix-cache.s3.cri.epita.fr"
+        # Hyprland cache
+        "https://hyprland.cachix.org"
+        # Other cache website
+        "https://cache.nixos.org/"
+      ];
+
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
 
     gc.automatic = false;
   };
