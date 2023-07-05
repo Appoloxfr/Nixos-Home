@@ -80,6 +80,7 @@ let
       "${ws10}" = [{ class = "thunderbird"; }];
     };
     startup = [
+      { command = "gnome-keyring-daemon --start --components=secrets"; }
       { command = "thunderbird"; }
       { command = "discord --start-minimized"; }
       { command = "slack -u"; }

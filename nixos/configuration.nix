@@ -77,7 +77,14 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
-  programs.fish.enable = true;
+  programs = {
+    fish.enable = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+  };
 
   fonts = {
     fontconfig = {
@@ -93,6 +100,7 @@
   };
 
   services = {
+    gnome.gnome-keyring.enable = true;
     blueman.enable = true;
     xserver = {
       enable = true;
