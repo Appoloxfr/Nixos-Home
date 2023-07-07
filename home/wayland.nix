@@ -1,5 +1,7 @@
+{ pkgs }:
 let
-  rofiTheme = ./programs/rofi-theme/rofidmenu.rasi;
+  rofiTheme = ./programs/rofi/rofidmenu.rasi;
+  rofiScript = import ./programs/rofi/script.nix { inherit pkgs; };
 in
 {
   windowManager.hyprland = {
@@ -8,9 +10,9 @@ in
     nvidiaPatches = false;
     extraConfig = ''
       $mainMod = WIN
-      monitor=,preferred,auto,1 
-      # monitor=HDMI-A-1, 1920x1080, 0x0, 1
-      # monitor=eDP-1, 1920x1080, 1920x0, 1
+      # monitor=,preferred,auto,1 
+      monitor=HDMI-A-1, 1920x1080, 0x0, 1
+      monitor=eDP-1, 1920x1080, 1920x0, 1
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
       input {
@@ -101,13 +103,16 @@ in
         enable_swallow = true
         swallow_regex =
         focus_on_activate = true
+        
+        mouse_move_enables_dpms = true
+        key_press_enables_dpms = true
       }
       device:epic mouse V1 {
         sensitivity = -0.5
       }
       bind = $mainMod, Return, exec, kitty fish
       bind = $mainMod SHIFT, Q, killactive,
-      bind = $mainMod SHIFT, E, exit,
+      bind = $mainMod SHIFT, E, exec, ${rofiScript.powermenu}
       bind = $mainMod SHIFT, Space, togglefloating,
       bind = $mainMod,F,fullscreen
       bind = $mainMod,Y,pin
@@ -143,8 +148,6 @@ in
       bind = $mainMod, 8, workspace, 8
       bind = $mainMod, 9, workspace, 9
       bind = $mainMod, 0, workspace, 10
-      bind = $mainMod, L, workspace, +1
-      bind = $mainMod, H, workspace, -1
       bind = $mainMod, period, workspace, e+1
       bind = $mainMod, comma, workspace,e-1
       bind = $mainMod, Q, workspace,QQ
@@ -188,9 +191,6 @@ in
       bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
       bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
-      # Scroll through existing workspaces with mainMod + scroll
-      bind = $mainMod, mouse_down, workspace, e+1
-      bind = $mainMod, mouse_up, workspace, e-1
       #-------------------------------------------#
       # switch between current and last workspace #
       #-------------------------------------------#
@@ -204,8 +204,7 @@ in
       #------------------------# 
       bind=$mainMod,D,exec,rofi -modi drun -show drun -config ${rofiTheme}
       bind=$mainMod,E,exec,rofi -modi emoji -show emoji -theme solarized -font "hack 12" -width 800
-      bind=$mainMod SHIFT,X,exec,myswaylock
-      bind=$mainMod,T,exec,telegram-desktop
+      bind=$mainMod SHIFT,L,exec,swaylock
       bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
       bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
       bind=$mainMod,A,exec, grimblast_watermark
@@ -216,15 +215,11 @@ in
       bind=,XF86AudioLowerVolume,exec, pamixer -d 5
       bind=,XF86AudioMute,exec, pamixer -t
       bind=,XF86AudioMicMute,exec, pamixer --default-source -t
-      bind=,XF86MonBrightnessUp,exec, light -A 5
-      bind=,XF86MonBrightnessDown, exec, light -U 5
+      # bind=,XF86MonBrightnessUp,exec, light -A 5
+      # bind=,XF86MonBrightnessDown, exec, light -U 5
       bind=,XF86AudioPlay,exec, mpc -q toggle 
       bind=,XF86AudioNext,exec, mpc -q next 
       bind=,XF86AudioPrev,exec, mpc -q prev
-      #---------------#
-      # waybar toggle #
-      # --------------#
-      bind=$mainMod,O,exec,killall -SIGUSR1 .waybar-wrapped
       #---------------#
       # resize window #
       #---------------#
@@ -253,15 +248,14 @@ in
       #-----------------------#
       # wall(by swww service) #
       #-----------------------#
-      # exec-once = dynamic_wallpaper
-      # exec-once = default_wall 
+      exec-once = hyprpaper
       #------------#
       # auto start #
       #------------#
-      exec-once = launch_waybar &
       exec-once = mako &
-      exec-once = border_color &
       exec-once = nm-applet --indicator &
+      exec-once = pkill waybar ; waybar -c ~/.config/waybar/config -s ~/.config/waybar/style.css > /dev/null 2>&1 &
+      exec-once = swayidle
       #---------------#
       # windows rules #
       #---------------#
