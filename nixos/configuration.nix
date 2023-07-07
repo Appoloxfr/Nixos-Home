@@ -49,6 +49,11 @@
       pkgs.sway-contrib.grimshot
       flameshot
       grim
+
+      swayidle
+      swaylock-effects
+
+      hyprpaper
     ];
   };
 
@@ -69,7 +74,7 @@
     '';
 
     settings = {
-        substituters = [
+      substituters = [
         # Epita cache
         "https://s3.cri.epita.fr/cri-nix-cache.s3.cri.epita.fr"
         # Hyprland cache
@@ -78,7 +83,7 @@
         "https://cache.nixos.org/"
       ];
 
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
     gc.automatic = false;
@@ -103,7 +108,7 @@
 
   users.users.gabriel = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     shell = pkgs.fish;
   };
   programs = {
@@ -113,6 +118,7 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
+      light.enable = true;
   };
 
   fonts = {
@@ -126,6 +132,10 @@
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = false;
+  };
+
+  xdg.portal = {
+    enable = true;
   };
 
   services = {
@@ -145,6 +155,8 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
     };
   };
 
@@ -173,6 +185,7 @@
   sound.enable = false;
 
   security.rtkit.enable = true;
+  security.pam.services.swaylock = { };
 
   system.stateVersion = "22.05";
 }
