@@ -1,0 +1,5 @@
+before-sleep "swaylock --fade-in 0 --grace 0 -f"
+
+timeout 60 "swaylock --fade-in 5 --grace 10 -f"
+timeout 90 "hyprctl dispatcher dpms off"
+timeout 100 "systemctl suspend"
