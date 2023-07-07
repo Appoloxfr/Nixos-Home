@@ -1,3 +1,5 @@
+{pkgs}:
 {
-  betterlockscreen = import ./betterlockscreen.nix;
+  mako = import ./mako.nix;
+  mpd = import ./mpd.nix;
 }
