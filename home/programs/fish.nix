@@ -1,6 +1,12 @@
 { pkgs, lib }:
 let
   initFile = ./fish/init.fish;
+
+  loginShellInit = ''
+    set TTY1 (tty)
+    [ "$TTY1" = "/dev/tty1" ] && exec Hyprland
+  '';
+
   shellAbbrs = {
     # Grep
     "grep" = "grep --color=auto";
@@ -57,6 +63,6 @@ let
 in
 {
   enable = true;
-  inherit shellAbbrs shellAliases functions plugins;
+  inherit loginShellInit shellAbbrs shellAliases functions plugins;
   interactiveShellInit = (builtins.readFile initFile);
 }
