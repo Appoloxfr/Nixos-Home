@@ -29,8 +29,11 @@ let
 
   desktopTools = with pkgs; [
     arandr
-    nitrogen
+    cava
+    ffmpeg_6
+    mpc-cli
     obs-studio
+    pamixer
     xdotool
   ];
 
@@ -47,7 +50,7 @@ let
   ++ (with pkgs.nerdfonts;
     [
       (override {
-        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" "NerdFontsSymbolsOnly" ];
+        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" "NerdFontsSymbolsOnly" "Iosevka" ];
       })
     ])
   ;
