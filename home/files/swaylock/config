@@ -1,7 +1,6 @@
 fade-in=0.3
 daemonize
 grace=2
-grace-no-mouse
 clock
 screenshots
 indicator-idle-visible

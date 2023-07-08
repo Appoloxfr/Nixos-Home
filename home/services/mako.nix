@@ -3,7 +3,7 @@ let
   borderColor = "#c0caf5";
   borderRadius = 3;
   borderSize = 3;
-  defaultTimeout = 5;
+  defaultTimeout = 5 * 1000;
   extraConfig = ''
     text-alignment=center
     [urgency=high]

@@ -248,11 +248,11 @@ in
       #-----------------------#
       # wall(by swww service) #
       #-----------------------#
-      exec-once = hyprpaper
+      exec-once = swww init
       #------------#
       # auto start #
       #------------#
-      exec-once = mako &
+      exec-once = mako 
       exec-once = nm-applet --indicator &
       exec-once = pkill waybar ; waybar -c ~/.config/waybar/config -s ~/.config/waybar/style.css > /dev/null 2>&1 &
       exec-once = swayidle
