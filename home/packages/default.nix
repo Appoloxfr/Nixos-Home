@@ -31,9 +31,11 @@ let
     arandr
     cava
     ffmpeg_6
+    logseq
     mpc-cli
     obs-studio
     pamixer
+    vlc
     xdotool
   ];
 
@@ -97,6 +99,8 @@ let
 
   miscTools = with pkgs; [
     ripgrep
+    htop
+    gtop
     wget
   ];
 
@@ -113,6 +117,10 @@ let
     python310
 
     python310Packages.ipython
+
+    python310Packages.tkinter
+    python310Packages.requests
+    python310Packages.tqdm
   ];
 
   rustTools = with pkgs; [
