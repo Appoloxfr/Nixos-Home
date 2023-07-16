@@ -49,6 +49,7 @@
       pkgs.sway-contrib.grimshot
       flameshot
       grim
+      xdg-utils
 
       swayidle
       swaylock-effects
