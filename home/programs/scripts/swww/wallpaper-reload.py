@@ -2,6 +2,18 @@ import os
 import re
 import glob
 import random
+import argparse
+
+# Parse arguments
+parser = argparse.ArgumentParser(description="Change wallpaper")
+parser.add_argument(
+    "-g",
+    "--gif",
+    action="store_true",
+    help="If set, only gif will be used as wallpapers",
+)
+
+args = parser.parse_args()
 
 # List of commands to be executed
 list_cmd = [""]
@@ -17,10 +29,13 @@ monitors = re.findall(regex, monitors_outputs)
 
 # Glob all available wallpapers (png or gif)
 wallpapers = glob.glob(
-    os.path.expanduser("~/Pictures/Background/**/*.png"), recursive=True
-) + glob.glob(
     os.path.expanduser("~/Pictures/Background/**/*.gif"), recursive=True
 )
+
+if not args.gif:
+    wallpapers += glob.glob(
+        os.path.expanduser("~/Pictures/Background/**/*.png"), recursive=True
+    )
 
 to_display = {}
 for monitor in monitors:
@@ -43,7 +58,7 @@ pretty_print = "\n".join(
         for monitor, wallpaper in to_display.items()
     ]
 )
-list_cmd.append(f"notify-send 'Wallpaper changed' '{pretty_print}'")
+list_cmd = [f"notify-send 'Wallpaper changed' '{pretty_print}'"] + list_cmd
 
 # Execute all commands and wait for them to finish
 for cmd in list_cmd:
