@@ -28,6 +28,7 @@ let
         "backlight"
         "memory"
         "cpu"
+        "custom/idle"
         "battery"
         "custom/powermenu"
         "tray"
@@ -52,6 +53,7 @@ let
 
       "custom/wall" = {
         "on-click" = "${scripts.reload_wallpaper}";
+        "on-click-right" = "${scripts.reload_wallpaper} --gif";
         "format" = " 󰠖 ";
         "tooltip" = false;
       };
@@ -63,8 +65,8 @@ let
         "format-stopped" = "<span foreground='#bb9af7'></span>";
         "format-disconnected" = "";
         "on-click" = "mpc --quiet toggle";
-        "on-click-right" = "mpc update; mpc ls | mpc add";
-        "on-click-middle" = "kitty --class='ncmpcpp' ncmpcpp ";
+        "on-click-right" = "kitty --class='ncmpcpp' ncmpcpp ";
+        "on-click-middle" = "mpc update; mpc ls | mpc add";
         "on-scroll-up" = "mpc --quiet prev";
         "on-scroll-down" = "mpc --quiet next";
         "smooth-scrolling-threshold" = 5;
@@ -74,6 +76,7 @@ let
       "custom/cava" = {
         "exec" = "sleep 1 && cava -p ${./cava/config.conf} | sed -u 's/;//g;s/0/▁/g;s/1/▂/g;s/2/▃/g;s/3/▄/g;s/4/▅/g;s/5/▆/g;s/6/▇/g;s/7/█/g;'";
         "tooltip" = false;
+        "on-click-right" = "kitty --class='ncmpcpp' cava ";
 
         # "ccava_config" = ./cava/config.conf;
         # "framerate" = 30;
@@ -116,11 +119,18 @@ let
         "format" = "{icon} {percent}%";
         "format-icons" = [ "󰃝" "󰃞" "󰃟" "󰃠" ];
       };
+
+      "custom/idle" = {
+        "format" = "󰤄";
+        "on-click" = "${rofiScript.idle}";
+        "tooltip" = false;
+      };
+
       "battery" = {
         "interval" = 10;
         "states" = {
-          "warning" = 20;
-          "critical" = 10;
+          "warning" = 15;
+          "critical" = 5;
         };
         "format" = "{icon} {capacity}%";
         "format-icons" = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
@@ -147,7 +157,7 @@ let
 
       "custom/powermenu" = {
         "format" = "";
-        "on-click" = "pkill rofi || ${rofiScript.powermenu}";
+        "on-click" = "${rofiScript.powermenu}";
         "tooltip" = false;
       };
     };
@@ -216,7 +226,7 @@ let
              padding-right: 6px;
              color: #7ebae4;
            }
-     #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava {
+     #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava, #custom-idle {
              padding-left: 10px;
              padding-right: 10px;
            }
@@ -255,6 +265,9 @@ let
 
      #network.disconnected {
              color: rgb(255, 255, 255);
+           }
+     #custom-idle {
+             color: rgb(30,144,255);
            }
      #battery.charging, #battery.full, #battery.discharging {
              color: rgb(250, 227, 176);

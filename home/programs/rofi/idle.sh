@@ -3,35 +3,29 @@ set -e
 set -u
 
 # All supported choices
-all=(shutdown reboot lock suspend logout)
+all=(default music home)
 
 # By default, show all (i.e., just copy the array)
 show=("${all[@]}")
 
 declare -A texts
-texts[logout]="logout"
-texts[suspend]="suspend"
-texts[lock]="lock"
-texts[reboot]="reboot"
-texts[shutdown]="shutdown"
+texts[default]="default"
+texts[music]="music"
+texts[home]="home"
 
 declare -A icons
-icons[suspend]="⏾"
-icons[logout]="󰍃"
-icons[lock]=""
-icons[reboot]="󰜉"
-icons[shutdown]=""
+icons[default]=""
+icons[music]=""
+icons[home]=""
 icons[cancel]="󰜺"
 
 declare -A actions
-actions[logout]="loginctl terminate-session ${XDG_SESSION_ID-}"
-actions[lock]="swaylock"
-actions[suspend]="systemctl suspend"
-actions[reboot]="systemctl reboot"
-actions[shutdown]="systemctl poweroff"
+actions[default]="swayidle"
+actions[music]="swayidle -C ~/.config/swayidle/music"
+actions[home]=""
 
 # By default, ask for confirmation for actions that are irreversible
-confirmations=(reboot shutdown logout)
+confirmations=(home)
 
 # By default, no dry run
 dryrun=false
@@ -132,8 +126,11 @@ else
                 # Tell what would have been done
                 echo "Selected: $entry" >&2
             else
+                set +e
+                pkill swayidle
+                set -e
                 # Perform the action
-                ${actions[$entry]}
+                eval "${actions[$entry]}" > /dev/null &
             fi
             exit 0
         fi
