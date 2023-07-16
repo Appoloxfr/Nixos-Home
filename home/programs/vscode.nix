@@ -91,7 +91,7 @@ let
   ]);
 in
 {
-  inherit package;
+  # inherit package;
   enable = true;
   enableExtensionUpdateCheck = false;
   enableUpdateCheck = false;

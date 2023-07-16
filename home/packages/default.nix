@@ -29,8 +29,13 @@ let
 
   desktopTools = with pkgs; [
     arandr
-    nitrogen
+    cava
+    ffmpeg_6
+    logseq
+    mpc-cli
     obs-studio
+    pamixer
+    vlc
     xdotool
   ];
 
@@ -47,7 +52,7 @@ let
   ++ (with pkgs.nerdfonts;
     [
       (override {
-        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" "NerdFontsSymbolsOnly" ];
+        fonts = [ "CascadiaCode" "FiraCode" "JetBrainsMono" "NerdFontsSymbolsOnly" "Iosevka" ];
       })
     ])
   ;
@@ -94,6 +99,8 @@ let
 
   miscTools = with pkgs; [
     ripgrep
+    htop
+    gtop
     wget
   ];
 
@@ -110,6 +117,10 @@ let
     python310
 
     python310Packages.ipython
+
+    python310Packages.tkinter
+    python310Packages.requests
+    python310Packages.tqdm
   ];
 
   rustTools = with pkgs; [

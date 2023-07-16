@@ -15,17 +15,47 @@
       VISUAL = "vim";
     };
 
-    systemPackages = (with pkgs; [
+    systemPackages = with pkgs; [
       docker-client
       docker-compose
       arion
       blueman
       pavucontrol
-    ]) ++ (with pkgs.xfce;
-      [
-        xfce4-volumed-pulse
-      ])
-    ;
+
+      libnotify
+      wl-clipboard
+      wlr-randr
+      wayland
+      wayland-scanner
+      wayland-utils
+      egl-wayland
+      wayland-protocols
+      pkgs.xorg.xeyes
+      glfw-wayland
+      xwayland
+      pkgs.qt6.qtwayland
+      cinnamon.nemo
+      networkmanagerapplet
+      wev
+      wf-recorder
+      alsa-lib
+      alsa-utils
+      flac
+      pulsemixer
+      linux-firmware
+      sshpass
+      lxappearance
+      imagemagick
+      pkgs.sway-contrib.grimshot
+      flameshot
+      grim
+      xdg-utils
+
+      swayidle
+      swaylock-effects
+
+      swww
+    ];
   };
 
   virtualisation = {
@@ -44,13 +74,18 @@
       experimental-features = nix-command flakes
     '';
 
-    settings.substituters = [
-      # Epita cache
-      "https://s3.cri.epita.fr/cri-nix-cache.s3.cri.epita.fr"
-      # Other cache website
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
-    ];
+    settings = {
+      substituters = [
+        # Epita cache
+        "https://s3.cri.epita.fr/cri-nix-cache.s3.cri.epita.fr"
+        # Hyprland cache
+        "https://hyprland.cachix.org"
+        # Other cache website
+        "https://cache.nixos.org/"
+      ];
+
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
 
     gc.automatic = false;
   };
@@ -74,7 +109,7 @@
 
   users.users.gabriel = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     shell = pkgs.fish;
   };
   programs = {
@@ -84,6 +119,7 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
+    light.enable = true;
   };
 
   fonts = {
@@ -99,33 +135,14 @@
     pulseaudio.enable = false;
   };
 
+  xdg.portal = {
+    enable = true;
+  };
+
   services = {
     gnome.gnome-keyring.enable = true;
     blueman.enable = true;
     xserver = {
-      enable = true;
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-          enableScreensaver = false;
-        };
-      };
-      displayManager = { defaultSession = "xfce+i3"; };
-
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          dmenu # default i3 dmenu, won't boot without
-          # i3lock # default i3 screen locker
-          i3-gaps
-        ];
-        package = pkgs.i3-gaps;
-      };
-
-
       layout = "us";
       xkbVariant = "";
       xkbOptions = "caps:swapescape";
@@ -139,6 +156,8 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
     };
   };
 
@@ -167,6 +186,7 @@
   sound.enable = false;
 
   security.rtkit.enable = true;
+  security.pam.services.swaylock = { };
 
   system.stateVersion = "22.05";
 }

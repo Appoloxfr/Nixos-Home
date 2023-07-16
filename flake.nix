@@ -8,10 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, ... }:
+  outputs = { self, nixpkgs, flake-utils, home-manager, hyprland, ... }:
     let
       username = "gabriel";
       hostname = "nixos";
@@ -38,6 +39,8 @@
         "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            hyprland.homeManagerModules.default
+            { wayland.windowManager.hyprland.enable = true; }
             (import ./home {
               inherit pkgs system stateVersion username homeDirectory;
             })
@@ -50,6 +53,8 @@
           inherit system;
           modules = [
             ./nixos/configuration.nix
+            hyprland.nixosModules.default
+            { programs.hyprland.enable = true; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

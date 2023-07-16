@@ -1,6 +1,7 @@
 { pkgs }:
 let
-  neovim-config = pkgs.fetchFromGitHub {
+  neovim-config = "/home/gabriel/Documents/Utils/nvim-config";
+  neovim-config-Tim = pkgs.fetchFromGitHub {
     owner = "TimotheeDesveaux";
     repo = "nvim-config";
     rev = "c8fe64a919b7450a44f00e0dabb21adbf83b1156";
