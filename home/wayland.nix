@@ -11,8 +11,8 @@ in
     extraConfig = ''
       $mainMod = WIN
       # monitor=,preferred,auto,1 
-      monitor=HDMI-A-1, 1920x1080, 0x0, 1
-      monitor=eDP-1, 1920x1080, 1920x0, 1
+      monitor=HDMI-A-1, preferred, 1920x0, 1
+      monitor=eDP-1, 1920x1080, 1920x1080, 1
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
       input {
@@ -152,7 +152,6 @@ in
       bind = $mainMod, comma, workspace,e-1
       bind = $mainMod, Q, workspace,QQ
       bind = $mainMod, T, workspace,TG
-      bind = $mainMod, M, workspace,Music
       #-------------------------------#
       # special workspace(scratchpad) #
       #-------------------------------# 
@@ -191,6 +190,9 @@ in
       bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
       bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
       bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
+      # Move worspace to different monitor
+      bind = $mainMod, M, movecurrentworkspacetomonitor, +1
+      bind = $mainMod SHIFT, M, movecurrentworkspacetomonitor, -1
       #-------------------------------------------#
       # switch between current and last workspace #
       #-------------------------------------------#
@@ -204,7 +206,7 @@ in
       #------------------------# 
       bind=$mainMod,D,exec,rofi -modi drun -show drun -config ${rofiTheme}
       bind=$mainMod,E,exec,rofi -modi emoji -show emoji -theme solarized -font "hack 12" -width 800
-      bind=$mainMod SHIFT,L,exec,swaylock
+      bind=$mainMod SHIFT,L,exec, swaylock
       bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
       bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
       bind=$mainMod,A,exec, grimblast_watermark
@@ -215,8 +217,8 @@ in
       bind=,XF86AudioLowerVolume,exec, pamixer -d 5
       bind=,XF86AudioMute,exec, pamixer -t
       bind=,XF86AudioMicMute,exec, pamixer --default-source -t
-      # bind=,XF86MonBrightnessUp,exec, light -A 5
-      # bind=,XF86MonBrightnessDown, exec, light -U 5
+      bind=,XF86MonBrightnessUp,exec, light -A 5
+      bind=,XF86MonBrightnessDown, exec, light -U 5
       bind=,XF86AudioPlay,exec, mpc -q toggle 
       bind=,XF86AudioNext,exec, mpc -q next 
       bind=,XF86AudioPrev,exec, mpc -q prev
